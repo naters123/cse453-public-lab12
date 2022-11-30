@@ -8,3 +8,10 @@
 ########################################################################
 
 # you may need to put something here...
+
+from enum import Enum
+class Control(Enum):
+    PUBLIC, CONFIDENTIAL, PRIVILEGED, SECRET = range(0,3)
+
+    def __init__():
+        self._control_level
