@@ -1,0 +1,167 @@
+"""
+Read Requirement Testing
+"""
+
+####################################
+# TEST 1
+# Public users should see only public messages
+####################################
+Setup:
+    1. Sign in as public
+    2. Show a public message
+Output: Message should be displayed
+
+####################################
+# TEST 2
+# Secret users should see all messages
+####################################
+Setup: 
+    1. Sign in as secret
+    2. Show a secret message
+Output: Message should be displayed
+
+####################################
+# TEST 3
+# Public users should see only public messages
+####################################
+Setup: 
+    1. Sign in as public
+    2. display all public messages
+Output: 3 messages should be displayed
+
+####################################
+# TEST 4
+# Secret users should see all messages
+####################################
+Setup:
+    1. Sign in as secret
+    2. display all secret messages
+Output: 2 messages should be displayed
+
+
+"""
+Write Requirement Testing
+"""
+
+####################################
+# TEST 5
+# Public users should write to all 
+####################################
+Setup:
+    1. Sign in as public 
+    2. Update a secret message
+Output: The message should be updated
+
+####################################
+# TEST 6
+# Secret users can't update privileged message
+####################################
+Setup:
+    1. Sign in as secret
+    2. Update a privileged message
+Output: The message should not be updated
+
+
+"""
+Add Requirement Testing
+"""
+
+####################################
+# TEST 7
+# Secret adds secret message, confidential cannot see the message
+####################################
+Setup:
+    1. Sign in as secret
+    2. Add a secret message
+    3. Sign in as confidential
+    4. Request to view the new message
+Output: The request should be denied
+
+####################################
+# TEST 8
+# Public user adds public message, secret can see it
+####################################
+Setup:
+    1. Sign in as public
+    2. Add a public message
+    3. Sign in as secret
+    4. Request to view the new message
+Output: The request should be accepted
+
+"""
+Remove Requirement Testing
+"""
+
+####################################
+# TEST 9
+# Public tries to delete a secret, should be able to
+####################################
+Setup:
+    1. Sign in as public
+    2. Delete a secret message
+Output: Message should be deleted
+
+####################################
+# TEST 10
+# Secret tries to delete a confidential, should not be able to
+####################################
+Setup:
+    1. Sign in as secret
+    2. Delete a confidential message
+Output: Message should not be deleted
+
+
+"""
+Authenticate Requirement Testing
+"""
+
+####################################
+# TEST 11
+# Authenticate unknown user
+# Sign in as new user, should have public control
+####################################
+Setup:
+    1. Sign in as a new user
+    2. Display messages
+Output: Should only display public messages
+
+####################################
+# TEST 12
+# Sign in after a higher clearence user
+# Sign in after admirableAbe, should not have secret control
+####################################
+Setup:
+    1. Sign in as a secret user
+    2. Display messages
+Output 1: Should see all messages
+Setup Continued: 
+    3. Sign in as public user
+    2. Display all messages
+Output 2: Should see only public messages
+
+
+"""
+Password Testing
+"""
+####################################
+# TEST 13
+# Enter wrong password, just grant public access
+####################################
+Setup:
+    1. Sign in under AdmiralAbe 
+    2. Enter the wrong password
+    3. Display messages
+Output: Only public messages should display
+
+"""
+Message ID Testing
+"""
+
+####################################
+# TEST 14
+# Enter an message ID that doesnt exist, should display error.
+####################################
+Setup: 
+    1. Sign in under AdmiralAbe
+    2. Show message that doesn't exist
+Output: Error should display
