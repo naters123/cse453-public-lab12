@@ -2,7 +2,7 @@
 # COMPONENT:
 #    INTERACT
 # Author:
-#    Br. Helfrich, Kyle Mueller, Nathan Ricks
+#    Br. Helfrich, Kyle Mueller, Nathan Ricks, Josh Thieme, Emilio Regino
 # Summary: 
 #    This class allows one user to interact with the system
 ########################################################################

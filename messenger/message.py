@@ -2,7 +2,7 @@
 # COMPONENT:
 #    MESSAGE
 # Author:
-#    Br. Helfrich, Kyle Mueller, Nathan Ricks
+#    Br. Helfrich, Kyle Mueller, Nathan Ricks, Josh Thieme, Emilio Regino
 # Summary: 
 #    This class stores the notion of a message
 ########################################################################
