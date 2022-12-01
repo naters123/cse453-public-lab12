@@ -71,6 +71,7 @@ class Interact:
     ################################################## 
     def display(self):
         print("Messages:")
+        # create a subset of messages that the current user is allowed to see
         tempMessages = []
         for m in self._p_messages.getMessages():
             if self._control.securityConditionRead(self._p_messages.getAssetControl(m.get_id()).upper(), self._control.subjectControl):
@@ -86,7 +87,7 @@ class Interact:
         self._p_messages.add(self._prompt_for_line("message"),
                              self._username,
                              self._prompt_for_line("date"),
-                             self._control.getAuthenticateKey( self._control.authenticate(self._username)))
+                             self._control.getAuthenticateKey( self._control.authenticate(self._username))) # get the current user's authentication level
 
     ##################################################
     # INTERACT :: UPDATE
