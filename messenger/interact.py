@@ -57,7 +57,7 @@ class Interact:
     def show(self):
         id_ = self._prompt_for_id("display")
         #self._control.assetControlNum(self._p_messages.getAssetControl(id_))
-        if not self._control.securityConditionRead(self._control.assetControlNum(self._p_messages.getAssetControl(id_).upper()), self._control.subjectControl):
+        if self._control.securityConditionRead(self._control.assetControlNum(self._p_messages.getAssetControl(id_).upper()), self._control.subjectControl):
             if not self._p_messages.show(id_):
                 print(f"ERROR! Message ID \'{id_}\' does not exist")
         else:
