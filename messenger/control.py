@@ -14,10 +14,11 @@ class Control():
     # Authenticate the user and get him/her all set up
     # and establish control levels
     ##################################################
-    def __init__(self, username):
+    def __init__(self):
         self._controlLevels = {"SECRET" : 3, "PRIVILEGED" : 2, "CONFIDENTIAL" : 1, "PUBLIC" : 0}
         self._controlValue = { 3 : "SECRET", 2 : "PRIVILEGED", 1 : "CONFIDENTIAL", 0 : "PUBLIC"}
-        self.subjectControl = self.authenticate(username)
+        # self.subjectControl = self.authenticate(username)
+        
 
     ##################################################
     # Control GET AUTHENTICATION KEY
@@ -30,16 +31,29 @@ class Control():
     ##################################################
     # Control AUTHENTICATE
     # Get the authentication value based on name
+    # If the user enters a wrong password, then their
+    # access level become PUBLIC
     ##################################################
-    def authenticate(self, username):
+    def authenticate(self, username, password):
         if username in ["AdmiralAbe"]:
-            return self._controlLevels["SECRET"]
+            if password == "password":
+                self.subjectControl = self._controlLevels["SECRET"]
+            else:
+                self.subjectControl = self._controlLevels["PUBLIC"]
         elif username in  ["CaptainCharlie"]:
-            return self._controlLevels["PRIVILEGED"]
+            if password == "password":
+                self.subjectControl = self._controlLevels["PRIVILEGED"]
+            else:
+                self.subjectControl = self._controlLevels["PUBLIC"]
+            
         elif username in  ["SeamanSam", "SeamanSue", "SeamanSly"]:
-            return self._controlLevels["CONFIDENTIAL"]
+            if password == "password":
+                self.subjectControl = self._controlLevels["CONFIDENTIAL"]
+            else:
+                self.subjectControl = self._controlLevels["PUBLIC"]
+            
         else:
-            return self._controlLevels["PUBLIC"]
+            self.subjectControl = self._controlLevels["PUBLIC"]
 
     ##################################################
     # Control SECURITY CONDITION READ

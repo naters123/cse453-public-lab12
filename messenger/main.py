@@ -10,7 +10,7 @@
 ########################################################################
 
 from os import path
-import interact, messages
+import interact, messages, control
 
 # Gets the absolute path of the "messages.txt" file
 FILE_NAME = path.join(path.dirname(path.abspath(__file__)), "messages.txt")

@@ -45,10 +45,11 @@ class Interact:
     # Authenticate the user and get him/her all set up
     ##################################################
     def __init__(self, username, password, messages):
-        self._authenticate(username, password)
+        # self._authenticate(username, password)
         self._username = username
         self._p_messages = messages
-        self._control = control.Control(self._username)
+        self._control = control.Control()
+        self._control.authenticate(username, password)
 
     ##################################################
     # INTERACT :: SHOW
@@ -134,13 +135,13 @@ class Interact:
     def _prompt_for_id(self, verb):
         return int(input(f"Select the message ID to {verb}: "))
 
-    ##################################################
-    # INTERACT :: AUTHENTICATE
-    # Authenticate the user: find their control level
-    ################################################## 
-    def _authenticate(self, username, password):
-        id_ = self._id_from_user(username)
-        return ID_INVALID != id_ and password == users[id_].password
+    # ##################################################
+    # # INTERACT :: AUTHENTICATE
+    # # Authenticate the user: find their control level
+    # ################################################## 
+    # def _authenticate(self, username, password):
+    #     id_ = self._id_from_user(username)
+    #     return ID_INVALID != id_ and password == users[id_].password
 
     ##################################################
     # INTERACT :: ID FROM USER
