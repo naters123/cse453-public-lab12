@@ -2,7 +2,7 @@
 # COMPONENT:
 #    MESSAGES
 # Author:
-#    Br. Helfrich, Kyle Mueller, <your name here if you made a change>
+#    Br. Helfrich, Kyle Mueller, Nathan Ricks
 # Summary: 
 #    This class stores the notion of a collection of messages
 ########################################################################
@@ -24,11 +24,18 @@ class Messages:
         self._read_messages(filename)
 
     ##################################################
+    # MESSAGES :: GETMESSAGES
+    # return the list of messages
+    ################################################## 
+    def getMessages(self):
+        return self._messages
+
+    ##################################################
     # MESSAGES :: DISPLAY
     # Display the list of messages
     ################################################## 
-    def display(self):
-        for m in self._messages:
+    def display(self, messages):
+        for m in messages:
             m.display_properties()
 
     ##################################################
@@ -39,6 +46,16 @@ class Messages:
         for m in self._messages:
             if m.get_id() == id:
                 m.display_text()
+                return True
+        return False
+    
+    ##################################################
+    # MESSAGES :: EXISTS
+    # If a message does or does not exist
+    ################################################## 
+    def exists(self, id):
+        for m in self._messages:
+            if m.get_id() == id:
                 return True
         return False
 
@@ -68,6 +85,10 @@ class Messages:
         m = message.Message(text, author, date, text_control)
         self._messages.append(m)
 
+    ##################################################
+    # MESSAGES :: GETASSETCONTROL
+    # Get the access level for an asset by id
+    ################################################## 
     def getAssetControl(self, id):
         for m in self._messages:
             if m.get_id() == id:

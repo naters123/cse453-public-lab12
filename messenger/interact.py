@@ -2,7 +2,7 @@
 # COMPONENT:
 #    INTERACT
 # Author:
-#    Br. Helfrich, Kyle Mueller, <your name here if you made a change>
+#    Br. Helfrich, Kyle Mueller, Nathan Ricks
 # Summary: 
 #    This class allows one user to interact with the system
 ########################################################################
@@ -56,12 +56,13 @@ class Interact:
     ##################################################
     def show(self):
         id_ = self._prompt_for_id("display")
-        #self._control.assetControlNum(self._p_messages.getAssetControl(id_))
-        if self._control.securityConditionRead(self._control.assetControlNum(self._p_messages.getAssetControl(id_).upper()), self._control.subjectControl):
-            if not self._p_messages.show(id_):
-                print(f"ERROR! Message ID \'{id_}\' does not exist")
+        if self._p_messages.exists(id_):
+            if self._control.securityConditionRead(self._p_messages.getAssetControl(id_).upper(), self._control.subjectControl):
+                self._p_messages.show(id_)
+            else:
+                print("\nYou do not have permission to perform this action.")
         else:
-            print("You do not have permission to perform this action.")
+            print(f"\nERROR! Message ID \'{id_}\' does not exist")
         print()
 
     ##################################################
@@ -70,7 +71,11 @@ class Interact:
     ################################################## 
     def display(self):
         print("Messages:")
-        self._p_messages.display()
+        tempMessages = []
+        for m in self._p_messages.getMessages():
+            if self._control.securityConditionRead(self._p_messages.getAssetControl(m.get_id()).upper(), self._control.subjectControl):
+                tempMessages.append(m)
+        self._p_messages.display(tempMessages)
         print()
 
     ##################################################
@@ -80,7 +85,8 @@ class Interact:
     def add(self):
         self._p_messages.add(self._prompt_for_line("message"),
                              self._username,
-                             self._prompt_for_line("date"))
+                             self._prompt_for_line("date"),
+                             self._control.getAuthenticateKey( self._control.authenticate(self._username)))
 
     ##################################################
     # INTERACT :: UPDATE
@@ -88,10 +94,14 @@ class Interact:
     ################################################## 
     def update(self):
         id_ = self._prompt_for_id("update")
-        if not self._p_messages.show(id_):
+        if self._p_messages.exists(id_):
+            if self._control.securityConditionWrite(self._p_messages.getAssetControl(id_).upper(), self._control.subjectControl):
+                self._p_messages.show(id_)
+                self._p_messages.update(id_, self._prompt_for_line("message"))
+            else:
+                print("\nYou do not have permission to perform this action.")
+        else:
             print(f"ERROR! Message ID \'{id_}\' does not exist\n")
-            return
-        self._p_messages.update(id_, self._prompt_for_line("message"))
         print()
             
     ##################################################
@@ -99,7 +109,15 @@ class Interact:
     # Remove one message from the list
     ################################################## 
     def remove(self):
-        self._p_messages.remove(self._prompt_for_id("delete"))
+        id_ = self._prompt_for_id("delete")
+        if self._p_messages.exists(id_):
+            if self._control.securityConditionWrite(self._p_messages.getAssetControl(id_).upper(), self._control.subjectControl):
+                self._p_messages.remove(id_)
+            else:
+                print("\nYou do not have permission to perform this action.")
+        else:
+            print(f"ERROR! Message ID \'{id_}\' does not exist\n")
+        print()
 
     ##################################################
     # INTERACT :: PROMPT FOR LINE

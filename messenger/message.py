@@ -2,7 +2,7 @@
 # COMPONENT:
 #    MESSAGE
 # Author:
-#    Br. Helfrich, Kyle Mueller, <your name here if you made a change>
+#    Br. Helfrich, Kyle Mueller, Nathan Ricks
 # Summary: 
 #    This class stores the notion of a message
 ########################################################################
@@ -50,6 +50,10 @@ class Message:
     def get_id(self):
         return self._id
 
+    ##################################################
+    # MESSAGE :: GET ACCESS
+    # Get the access value of this message
+    ################################################## 
     def get_access(self):
         return self._text_control
 

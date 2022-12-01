@@ -2,12 +2,10 @@
 # COMPONENT:
 #    CONTROL
 # Author:
-#    Br. Helfrich, Kyle Mueller, <your name here if you made a change>
+#    Br. Helfrich, Kyle Mueller, Nathan Ricks
 # Summary: 
 #    This class stores the notion of Bell-LaPadula
 ########################################################################
-
-from enum import Enum
 
 class Control():
    
@@ -17,7 +15,12 @@ class Control():
     ##################################################
     def __init__(self, username):
         self._controlLevels = {"SECRET" : 3, "PRIVILEGED" : 2, "CONFIDENTIAL" : 1, "PUBLIC" : 0}
+        self._controlValue = { 3 : "SECRET", 2 : "PRIVILEGED", 1 : "CONFIDENTIAL", 0 : "PUBLIC"}
         self.subjectControl = self.authenticate(username)
+
+    def getAuthenticateKey(self, value):
+        return self._controlValue[value]
+        
 
     def authenticate(self, username):
         if username in ["AdmiralAbe"]:
@@ -28,9 +31,9 @@ class Control():
             return self._controlLevels["CONFIDENTIAL"]
         else:
             return self._controlLevels["PUBLIC"]
-    
-    def assetControlNum(self, control):
-        return self._controlLevels[control]
 
     def securityConditionRead(self, assetControl, subjectControl):
-        return subjectControl >= assetControl   
+        return subjectControl >= self._controlLevels[assetControl]
+
+    def securityConditionWrite(self, assetControl, subjectControl):
+        return self._controlLevels[assetControl] >= subjectControl
