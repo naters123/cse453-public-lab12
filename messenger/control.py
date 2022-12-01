@@ -36,4 +36,4 @@ class Control():
         return subjectControl >= self._controlLevels[assetControl]
 
     def securityConditionWrite(self, assetControl, subjectControl):
-        return self._controlLevels[assetControl] >= subjectControl
+        return subjectControl <= self._controlLevels[assetControl]
