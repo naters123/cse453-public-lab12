@@ -48,6 +48,7 @@ class Interact:
         self._authenticate(username, password)
         self._username = username
         self._p_messages = messages
+        self._control = control.Control(self._username)
 
     ##################################################
     # INTERACT :: SHOW
@@ -55,8 +56,12 @@ class Interact:
     ##################################################
     def show(self):
         id_ = self._prompt_for_id("display")
-        if not self._p_messages.show(id_):
-            print(f"ERROR! Message ID \'{id_}\' does not exist")
+        #self._control.assetControlNum(self._p_messages.getAssetControl(id_))
+        if not self._control.securityConditionRead(self._control.assetControlNum(self._p_messages.getAssetControl(id_).upper()), self._control.subjectControl):
+            if not self._p_messages.show(id_):
+                print(f"ERROR! Message ID \'{id_}\' does not exist")
+        else:
+            print("You do not have permission to perform this action.")
         print()
 
     ##################################################

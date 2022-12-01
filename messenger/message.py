@@ -34,13 +34,14 @@ class Message:
     # MESSAGE NON-DEFAULT CONSTRUCTOR
     # Create a message and fill it
     ##################################################   
-    def __init__(self, text, author, date):
+    def __init__(self, text, author, date, text_control):
         self._text = text
         self._author = author
         self._date = date
         self._id = Message._id_next
         Message._id_next += 1
         self._empty = False
+        self._text_control = text_control
 
     ##################################################
     # MESSAGE :: GET ID
@@ -48,6 +49,9 @@ class Message:
     ##################################################   
     def get_id(self):
         return self._id
+
+    def get_access(self):
+        return self._text_control
 
     ##################################################
     # MESSAGE :: DISPLAY PROPERTIES
