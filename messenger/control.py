@@ -16,9 +16,7 @@ class Control():
     ##################################################
     def __init__(self):
         self._controlLevels = {"SECRET" : 3, "PRIVILEGED" : 2, "CONFIDENTIAL" : 1, "PUBLIC" : 0}
-        self._controlValue = { 3 : "SECRET", 2 : "PRIVILEGED", 1 : "CONFIDENTIAL", 0 : "PUBLIC"}
-        # self.subjectControl = self.authenticate(username)
-        
+        self._controlValue = { 3 : "SECRET", 2 : "PRIVILEGED", 1 : "CONFIDENTIAL", 0 : "PUBLIC"}        
 
     ##################################################
     # Control GET AUTHENTICATION KEY
@@ -40,6 +38,7 @@ class Control():
                 self.subjectControl = self._controlLevels["SECRET"]
             else:
                 self.subjectControl = self._controlLevels["PUBLIC"]
+        
         elif username in  ["CaptainCharlie"]:
             if password == "password":
                 self.subjectControl = self._controlLevels["PRIVILEGED"]

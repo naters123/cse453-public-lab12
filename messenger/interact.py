@@ -59,7 +59,7 @@ class Interact:
         id_ = self._prompt_for_id("display")
         if self._p_messages.exists(id_):
             if self._control.securityConditionRead(self._p_messages.getAssetControl(id_).upper(), self._control.subjectControl):
-                self._p_messages.show(id_)
+                self._p_messages.show(id_, self._control)
             else:
                 print("\nYou do not have permission to perform this action.")
         else:
@@ -77,7 +77,7 @@ class Interact:
         for m in self._p_messages.getMessages():
             if self._control.securityConditionRead(self._p_messages.getAssetControl(m.get_id()).upper(), self._control.subjectControl):
                 tempMessages.append(m)
-        self._p_messages.display(tempMessages)
+        self._p_messages.display(tempMessages, self._control)
         print()
 
     ##################################################
@@ -98,8 +98,8 @@ class Interact:
         id_ = self._prompt_for_id("update")
         if self._p_messages.exists(id_):
             if self._control.securityConditionWrite(self._p_messages.getAssetControl(id_).upper(), self._control.subjectControl):
-                self._p_messages.show(id_)
-                self._p_messages.update(id_, self._prompt_for_line("message"))
+                self._p_messages.show(id_, self._control)
+                self._p_messages.update(id_, self._prompt_for_line("message"), self._control)
             else:
                 print("\nYou do not have permission to perform this action.")
         else:
@@ -114,7 +114,7 @@ class Interact:
         id_ = self._prompt_for_id("delete")
         if self._p_messages.exists(id_):
             if self._control.securityConditionWrite(self._p_messages.getAssetControl(id_).upper(), self._control.subjectControl):
-                self._p_messages.remove(id_)
+                self._p_messages.remove(id_, self._control)
             else:
                 print("\nYou do not have permission to perform this action.")
         else:

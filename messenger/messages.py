@@ -34,19 +34,21 @@ class Messages:
     # MESSAGES :: DISPLAY
     # Display the list of messages
     ################################################## 
-    def display(self, messages):
+    def display(self, messages, control):
         for m in messages:
-            m.display_properties()
+            if control.securityConditionRead(self.getAssetControl(m.get_id()).upper(), control.subjectControl):
+                m.display_properties()
 
     ##################################################
     # MESSAGES :: SHOW
     # Show a single message
     ################################################## 
-    def show(self, id):
+    def show(self, id, control):
         for m in self._messages:
-            if m.get_id() == id:
-                m.display_text()
-                return True
+            if control.securityConditionRead(self.getAssetControl(m.get_id()).upper(), control.subjectControl):
+                if m.get_id() == id:
+                    m.display_text()
+                    return True
         return False
     
     ##################################################
@@ -63,19 +65,22 @@ class Messages:
     # MESSAGES :: UPDATE
     # Update a single message
     ################################################## 
-    def update(self, id, text):
+    def update(self, id, text, control):
         for m in self._messages:
-            if m.get_id() == id:
-                m.update_text(text)
+            if control.securityConditionWrite(self.getAssetControl(m.get_id()).upper(), control.subjectControl):
+                if m.get_id() == id:
+                    m.update_text(text)
 
     ##################################################
     # MESSAGES :: REMOVE
     # Remove a single message
     ################################################## 
-    def remove(self, id):
+    def remove(self, id, control):
         for m in self._messages:
-            if m.get_id() == id:
-                m.clear()
+            if control.securityConditionWrite(self.getAssetControl(m.get_id()).upper(), control.subjectControl):
+                if m.get_id() == id:
+                    m.clear()
+                    print('Message removed.')
 
     ##################################################
     # MESSAGES :: ADD
