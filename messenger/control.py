@@ -36,23 +36,30 @@ class Control():
         if username in ["AdmiralAbe"]:
             if password == "password":
                 self.subjectControl = self._controlLevels["SECRET"]
+                return self.subjectControl
             else:
                 self.subjectControl = self._controlLevels["PUBLIC"]
+                return self.subjectControl
         
         elif username in  ["CaptainCharlie"]:
             if password == "password":
                 self.subjectControl = self._controlLevels["PRIVILEGED"]
+                return self.subjectControl
             else:
                 self.subjectControl = self._controlLevels["PUBLIC"]
+                return self.subjectControl
             
         elif username in  ["SeamanSam", "SeamanSue", "SeamanSly"]:
             if password == "password":
                 self.subjectControl = self._controlLevels["CONFIDENTIAL"]
+                return self.subjectControl
             else:
                 self.subjectControl = self._controlLevels["PUBLIC"]
+                return self.subjectControl
             
         else:
             self.subjectControl = self._controlLevels["PUBLIC"]
+            return self.subjectControl
 
     ##################################################
     # Control SECURITY CONDITION READ

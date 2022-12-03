@@ -45,11 +45,11 @@ class Interact:
     # Authenticate the user and get him/her all set up
     ##################################################
     def __init__(self, username, password, messages):
-        # self._authenticate(username, password)
         self._username = username
         self._p_messages = messages
         self._control = control.Control()
         self._control.authenticate(username, password)
+        self._password = password
 
     ##################################################
     # INTERACT :: SHOW
@@ -88,7 +88,7 @@ class Interact:
         self._p_messages.add(self._prompt_for_line("message"),
                              self._username,
                              self._prompt_for_line("date"),
-                             self._control.getAuthenticateKey( self._control.authenticate(self._username))) # get the current user's authentication level
+                             self._control.getAuthenticateKey(self._control.authenticate(self._username, self._password))) # get the current user's authentication level
 
     ##################################################
     # INTERACT :: UPDATE
